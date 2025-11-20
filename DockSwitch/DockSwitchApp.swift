@@ -2,6 +2,68 @@ import SwiftUI
 import Combine
 import AppKit
 
+// MARK: - Global Menu Bar Manager
+
+class MenuBarController: NSObject {
+    static let shared = MenuBarController()
+    
+    private var statusItem: NSStatusItem?
+    private var popover: NSPopover?
+    
+    func setup() {
+        // Create status item
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        
+        if let button = statusItem?.button {
+            button.image = NSImage(systemSymbolName: "dock.rectangle", accessibilityDescription: "DockSwitch")
+            button.action = #selector(togglePopover)
+            button.target = self
+        }
+        
+        // Create popover
+        popover = NSPopover()
+        popover?.contentSize = NSSize(width: 300, height: 500)
+        popover?.behavior = .transient
+        popover?.contentViewController = NSHostingController(rootView: MenuBarView())
+    }
+    
+    @objc func togglePopover() {
+        guard let button = statusItem?.button else { return }
+        
+        if let popover = popover {
+            if popover.isShown {
+                popover.performClose(nil)
+            } else {
+                popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+            }
+        }
+    }
+    
+    func hideIcon() {
+        statusItem?.isVisible = false
+        popover?.performClose(nil)
+    }
+    
+    func showIcon() {
+        statusItem?.isVisible = true
+    }
+}
+
+// MARK: - App Delegate for handling app reopen events
+
+class AppDelegate: NSObject, NSApplicationDelegate {
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        // Setup menu bar
+        MenuBarController.shared.setup()
+    }
+    
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        // Show menu bar icon when app is clicked again
+        MenuBarController.shared.showIcon()
+        return true
+    }
+}
+
 // MARK: - Data Models
 
 struct LayoutConfig: Codable, Identifiable, Equatable {
@@ -251,16 +313,6 @@ struct MenuBarView: View {
             
             // Current environment configuration section
             VStack(alignment: .leading) {
-                Text(NSLocalizedString("fingerprint_title", comment: ""))
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                
-                Text(manager.currentFingerprint.isEmpty ? NSLocalizedString("status_detecting", comment: "") : NSLocalizedString("status_detected", comment: ""))
-                    .font(.system(.caption, design: .monospaced))
-                    .lineLimit(1)
-                    .truncationMode(.middle)
-                    .opacity(0.6)
-                
                 // Configuration form for current environment (always visible, supports updates)
                 VStack(alignment: .leading, spacing: 8) {
                     if let existingConfig = manager.currentConfig {
@@ -385,13 +437,32 @@ struct MenuBarView: View {
             
             Divider()
             
-            // Quit button
-            Button(NSLocalizedString("button_quit", comment: "")) {
-                NSApplication.shared.terminate(nil)
+            HStack {
+                Button(action: {
+                    MenuBarController.shared.hideIcon()
+                }) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "eye.slash")
+                        Text(NSLocalizedString("button_hide_icon", comment: ""))
+                    }
+                }
+                .buttonStyle(.plain)
+                .font(.caption)
+                
+                Spacer()
+                
+                Button(action: {
+                    NSApplication.shared.terminate(nil)
+                }) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "power")
+                        Text(NSLocalizedString("button_quit_app", comment: ""))
+                    }
+                }
+                .buttonStyle(.plain)
+                .font(.caption)
+                .foregroundColor(.red)
             }
-            .buttonStyle(.plain)
-            .font(.caption)
-            .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .padding()
         .frame(width: 300)
@@ -402,12 +473,12 @@ struct MenuBarView: View {
 
 @main
 struct DockSwitchApp: App {
-    // Use MenuBarExtra to keep the app in the menu bar (requires macOS 13.0+)
-    // For older version compatibility, the code would be more complex
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     var body: some Scene {
-        MenuBarExtra("DockSwitch", systemImage: "dock.rectangle") {
-            MenuBarView()
+        // Empty scene - menu bar is managed by MenuBarController
+        Settings {
+            EmptyView()
         }
-        .menuBarExtraStyle(.window) // Display a small window when clicked
     }
 }

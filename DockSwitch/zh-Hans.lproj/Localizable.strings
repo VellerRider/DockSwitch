@@ -3,20 +3,15 @@
 
 // Status Messages
 "status_ready" = "就绪";
-"status_changed_to_format" = "已切换到 %@";
 "status_new_environment" = "检测到新的环境，尚未配置";
 "status_need_permission" = "需要权限";
 "status_switch_failed" = "切换失败，请重试";
 "status_switched_applescript_format" = "已切换 (AppleScript): %@";
 "status_auto_switched_format" = "已自动切换至：%@";
-"status_detecting" = "正在检测...";
-"status_detected" = "已识别环境";
 "status_config_updated" = "已更新配置";
 "status_config_saved" = "已保存新配置";
 
 // Fingerprint Section
-"fingerprint_title" = "当前屏幕指纹识别:";
-"fingerprint_saved" = "当前环境已保存";
 "fingerprint_set_position" = "为此环境设置 Dock 位置:";
 
 // Config Section
@@ -27,11 +22,8 @@
 "picker_label_position" = "位置";
 
 // Buttons
-"button_save_apply" = "保存并应用";
 "button_save_config" = "保存配置";
 "button_update_config" = "更新配置";
-"button_delete" = "删除";
-"button_quit" = "退出 DockSwitch";
 
 // Saved Configs
 "saved_configs_title" = "已保存的方案";
@@ -46,8 +38,12 @@
 "unnamed_config" = "未命名配置";
 "delete_config_tooltip" = "删除此配置";
 
+// Menu Actions
+"button_hide_icon" = "隐藏菜单栏图标";
+"button_quit_app" = "退出应用";
+
 // Permission Alert
 "permission_alert_title" = "需要自动化权限";
-"permission_alert_message" = "DockSwitch 需要控制 'System Events' 来修改 Dock 位置。\n\n请在“系统设置 > 隐私与安全性 > 自动化”中允许 DockSwitch。";
+"permission_alert_message" = "DockSwitch 需要控制 'System Events' 来修改 Dock 位置。\n\n请在「系统设置 > 隐私与安全性 > 自动化」中允许 DockSwitch。";
 "permission_button_open_settings" = "打开系统设置";
 "permission_button_cancel" = "取消";
