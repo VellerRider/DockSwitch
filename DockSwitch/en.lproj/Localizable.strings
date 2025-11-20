@@ -1,0 +1,53 @@
+// App Info
+"app_title" = "DockSwitch";
+
+// Status Messages
+"status_ready" = "Ready";
+"status_changed_to_format" = "Switched to %@";
+"status_new_environment" = "Detected new environment, not configured";
+"status_need_permission" = "Permission required";
+"status_switch_failed" = "Switch failed, please retry";
+"status_switched_applescript_format" = "Switched (AppleScript): %@";
+"status_auto_switched_format" = "Auto-switched to: %@";
+"status_detecting" = "Detecting...";
+"status_detected" = "Environment detected";
+"status_config_updated" = "Config updated";
+"status_config_saved" = "New config saved";
+
+// Fingerprint Section
+"fingerprint_title" = "Current screen fingerprint:";
+"fingerprint_saved" = "Current environment saved";
+"fingerprint_set_position" = "Set Dock position for this environment:";
+
+// Config Section
+"current_environment_format" = "Current Environment: %@";
+"update_environment_config" = "Update this environment config:";
+"name_placeholder" = "Give it a name (e.g. Office)";
+"dock_position_label" = "Dock Position";
+"picker_label_position" = "Position";
+
+// Buttons
+"button_save_apply" = "Save & Apply";
+"button_save_config" = "Save Config";
+"button_update_config" = "Update Config";
+"button_delete" = "Delete";
+"button_quit" = "Quit DockSwitch";
+
+// Saved Configs
+"saved_configs_title" = "Saved Configurations";
+"no_saved_configs" = "No saved configurations";
+
+// Dock Positions
+"dock_position_bottom" = "Bottom";
+"dock_position_left" = "Left";
+"dock_position_right" = "Right";
+
+// Misc
+"unnamed_config" = "Untitled";
+"delete_config_tooltip" = "Delete this configuration";
+
+// Permission Alert
+"permission_alert_title" = "Automation permission required";
+"permission_alert_message" = "DockSwitch needs to control 'System Events' to change the Dock position.\n\nPlease allow DockSwitch in System Settings > Privacy & Security > Automation.";
+"permission_button_open_settings" = "Open System Settings";
+"permission_button_cancel" = "Cancel";

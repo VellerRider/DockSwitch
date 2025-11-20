@@ -1,0 +1,1 @@
+"NSAppleEventsUsageDescription" = "DockSwitch 需要控制系统事件的权限，以便根据您的显示器配置自动调整 Dock 位置。这是用户主动保存的配置，需要您在系统设置中明确授权。";
