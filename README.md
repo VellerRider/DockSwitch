@@ -9,9 +9,7 @@
 </div>
 
 <div align="center">
-  <img src="docs/showcase.png" alt="DockSwitch Showcase" style="max-width:780px; width:100%; height:auto;" />
-  
-  <p><small>Showcase / 截图</small></p>
+  <img src="docs/showcase.png" alt="DockSwitch Showcase" style="max-width:450px; height:auto;" />
 </div>
 
 ---
